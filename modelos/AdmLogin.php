@@ -1,6 +1,6 @@
 <?php
 // Se incluye la conexion a la BD
-
+/* Linea agregada para usar con git */
 require "../config/Conexion.php";
 
 class AdmLogin
