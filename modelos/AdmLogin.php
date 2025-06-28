@@ -2,7 +2,7 @@
 // Se incluye la conexion a la BD
 /* Linea agregada para usar con git */
 require "../config/Conexion.php";
-
+/* Linea agregada desde la web */
 class AdmLogin
 {
 	//Implementamos el constructor
