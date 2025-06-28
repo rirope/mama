@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>SMS - Mama V.3.1</title>
+    <!-- Tell the browser to be responsive to screen width -->
+    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+    <!-- Bootstrap 3.3.5 -->
+    <link rel="stylesheet" href="../public/css/bootstrap.min.css">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="../public/css/font-awesome.css">
+   
+    <!-- Theme style -->
+    <link rel="stylesheet" href="../public/css/AdminLTE.css">
+
+    <!-- Para los combos select -->
+    <link rel="stylesheet" type="text/css" href="../public/css/bootstrap-select.min.css">
+
+    <!-- iCheck -->
+    <link rel="stylesheet" href="../public/css/blue.css">
+
+    <!-- Linea insertada para probar copia de git -->
+  </head>
+  <body class="hold-transition login-page" onload="init();">
+    <div id="back"></div>
+    <div class="login-box">
+      <div class="login-logo">
+        <img src="../logo-mama.png">
+      </div><!-- /.login-logo -->
+      <div class="login-box-body">
+        <p class="login-box-msg"><strong class="text-center">Ingrese sus datos de Acceso</strong></p>
+        <form method="post" id="frmAcceso">
+          <div class="form-group has-feedback">
+            <input type="text" id="usuarioa" name="usuarioa" class="form-control" placeholder="Usuario">
+            <span class="fa fa-user form-control-feedback"></span>
+          </div>
+          <div class="form-group has-feedback">
+            <input type="password" id="clavea" name="clavea" class="form-control" placeholder="Password">
+            <span class="fa fa-key form-control-feedback"></span>
+          </div>
+          <div class="row">
+            <div class="col-xs-8">
+              
+            </div><!-- /.col -->
+            <div class="col-xs-4">
+              <button type="submit" id="ingresar" name="ingresar" class="btn btn-primary btn-block btn-flat">Ingresar</button>
+            </div><!-- /.col -->
+          </div>
+        </form>
+
+      </div><!-- /.login-box-body -->
+      <br>
+      <div>
+        <button type="button" class="btn btn-warning btn-xs" name="btnNvoUsuario" id="btnNvoUsuario" onclick="modalNvoUsuario()">¿Usuario Nuevo?</button>
+        <button type="button" class="btn btn-success btn-xs pull-right" id="btnRecuperaEmail" onclick="modalRecuperaEMail()">Recuperar contraseña</button>
+      </div>
+
+      <div>
+          <h1><p class="text-center" style="color:white;"><i class="fa fa-envelope" style="font-size: 26px;"></i> SMS MAMA</p></h1>
+          <p class="text-center" style="color:#EC7063;">
+          <a href="http://mama.org.pe/" target="_blank">Web:http://mama.org.pe/</a>
+          </p>
+      </div>
+
+
+    </div><!-- /.login-box -->
+
+    <!-- Modal Registro de Usuario Operador -->
+    <div id="usuOperadorNuevo" class="modal fade" tabindex="-1" role="dialog">
+      <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+
+            <!--=====================================
+            CABEZA DEL MODAL
+            ======================================-->
+            <div class="modal-header" style="background:#3c8dbc; color:white">
+              <button type="button" class="close" data-dismiss="modal">&times;</button>
+              <h4 class="modal-title">Registro de Nuevo Usuario Operador</h4>
+            </div>
+            <!--=====================================
+            CUERPO DEL MODAL
+            ======================================-->
+            <div class="modal-body">
+              <div class="box-body">
+
+                <!-- DATOS DEL USUARIO-->
+                <div id="nroDoc" class="form-group col-lg-10 col-md-10 col-sm-10 col-xs-12" style="margin-bottom:0px;">
+                  <label>Nro de DNI</label>
+                  <input type="hidden" name="idPers" id="idPers" value="">
+                  <input type="hidden" name="tcAccion" id="tcAccion" value="">
+                  <input type="number" style="width:45%;" class="form-control" name="nroDi" id="nroDi" placeholder="Número DNI" onkeypress="return soloNumeros(event,8,'nroDi');" required>
+                </div>
+
+                <div class="form-group col-lg-2 col-md-2 col-sm-2 col-xs-12" style="margin-bottom:0px;">
+                  <label>&nbsp</label></br>
+                  <button class="btn btn-warning" type="button" name="buscarDatosOperador" id="buscarDatosOperador" onclick="buscarDatosOperador()"><i class="fa fa-search"></i>Buscar</button>
+                </div>
+                
+                <div class="form-group col-lg-12 col-md-12 col-sm-12 col-xs-12" style="margin-bottom:0px;">
+                  <hr/>  
+                </div>
+
+                <div class="form-group col-lg-3 col-md-3 col-sm-3 col-xs-12">
+                  <label>Apellido Paterno</label>
+                  <input type="text" style="text-transform:uppercase;" onkeyup="javascript:this.value=this.value.toUpperCase();" class="form-control" name="apePat" id="apePat" maxlength="100" placeholder="Apellido Paterno" required>
+                </div>
+
+                <div class="form-group col-lg-3 col-md-3 col-sm-3 col-xs-12">
+                  <label>Apellido Materno</label>
+                  <input type="text" style="text-transform:uppercase;" onkeyup="javascript:this.value=this.value.toUpperCase();" class="form-control" name="apeMat" id="apeMat" maxlength="100" placeholder="Apellido Materno" required>
+                </div>
+
+                <div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                  <label>Nombres</label>
+                  <input type="text" style="text-transform:uppercase;" onkeyup="javascript:this.value=this.value.toUpperCase();" class="form-control" name="nombres" id="nombres" maxlength="150" placeholder="Nombres" required>
+                </div>
+
+                <div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                  <label>Profesión</label>
+                  <select name="idProf" id="idProf" class="form-control selectpicker" data-live-search="true" required>
+                  </select>
+                </div>
+
+                <div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                  <label>Correo Electrónico</label>
+                  <input type="email" class="form-control" name="correoElec" id="correoElec" placeholder="Correo Electrónico" required>
+                </div>
+
+                <div class="form-group col-lg-12 col-md-12 col-sm-12 col-xs-12" style="margin-bottom:0px;">
+                  <h4>Lugar de Acceso</h4><hr style="margin-bottom:0px; margin-top: 0px;"/>  
+                </div>
+
+                <div class="form-group col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                  <label>Disa/Geresa</label>
+                  <select name="iddisaUsu" id="iddisaUsu" class="form-control selectpicker" data-live-search="true" onchange='cargarRedesUsu(this.value);'>
+                    <option value="00">Todas las Geresas</option>
+                  </select>
+                </div>
+
+                <div class="form-group col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                  <label>Red</label></br>
+                  <select name="idredUsu" id="idredUsu" class="form-control selectpicker" data-live-search="true" onchange='cargarMicroRedesUsu(this.value);'>
+                    <option value="0000">Todas las Redes</option>
+                  </select>
+                </div>
+
+                <div class="form-group col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                  <label>MicroRed</label>
+                  <select name="idmredUsu" id="idmredUsu" class="form-control selectpicker" data-live-search="true" onchange='cargarEstablUsu(this.value);'>
+                    <option value="000000">Todas las MicroRedes</option>
+                  </select>
+                </div>
+
+                <div class="form-group col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                  <label>Establecimiento</label>
+                  <select name="idestabUsu" id="idestabUsu" class="form-control selectpicker" data-live-search="true">
+                    <option value="0">Todos los Establecimientos</option>
+                  </select>
+                </div>
+
+                <!-- FECHA DE REGISTRO -->
+                <div class="form-group col-lg-3 col-md-3 col-sm-3 col-xs-12">
+                  <label>Fecha de Registro</label>
+                  <h4><p id="fechaReg"></p></h4>
+                </div>
+              </div>
+
+            </div>
+
+            <!--=====================================
+            PIE DEL MODAL
+            ======================================-->
+            <div class="modal-footer">
+              <button type="button" type="submit" id="btnGrabaUsuario" name="btnGrabaUsuario" onclick="grabarDatosUsuario()" class="btn btn-primary">Aceptar</button>
+              <button type="button" class="btn btn-danger" data-dismiss="modal">Salir</button>
+            </div>
+
+        </div>
+      </div>
+    </div>
+    <!-- Fin modal -->
+
+    <!-- Modal Recuperar contraseña -->
+    <div id="recuperarPass" class="modal fade" tabindex="-1" role="dialog">
+      <div class="modal-dialog">
+        <div class="modal-content">
+
+            <!--=====================================
+            CABEZA DEL MODAL
+            ======================================-->
+            <div class="modal-header" style="background:#3c8dbc; color:white">
+              <button type="button" class="close" data-dismiss="modal">&times;</button>
+              <h4 class="modal-title">Recuperar Contraseña</h4>
+            </div>
+            <!--=====================================
+            CUERPO DEL MODAL
+            ======================================-->
+            <div class="modal-body">
+              <div class="box-body">
+
+                <!-- DATOS DEL USUARIO-->
+                <div class="form-group col-lg-12 col-md-12 col-sm-12 col-xs-12 has-error">
+                  <label>Ingrese su Correo Electrónico</label>
+                  <input type="email" class="form-control" name="correoElecRec" id="correoElecRec" placeholder="Correo Electrónico" required><span id="emailOK"></span>
+                  <p>Debe ingresar el correo que declaró cuando hizo su registro en el Sistema. De otra manera no le llegará ningún mensaje.</p>
+                </div>
+              </div>
+            </div>
+
+            <!--=====================================
+            PIE DEL MODAL
+            ======================================-->
+            <div class="modal-footer">
+              <button type="button" type="submit" id="btnValidarEMail" name="btnValidarEMail" onclick="validarEmail()" class="btn btn-primary" data-dismiss="modal">Aceptar</button>
+              <button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
+            </div>
+
+        </div>
+      </div>
+    </div>
+    <!-- Fin modal -->
+
+
+    <!-- jQuery -->
+    <script src="../public/js/jquery-3.1.1.min.js"></script>
+    <!-- Bootstrap 3.3.5 -->
+    <script src="../public/js/bootstrap.min.js"></script>
+    <!-- Bootbox -->
+    <script src="../public/js/bootbox.min.js"></script>
+    
+    <!-- Para los combos select -->
+    <script src="../public/js/bootstrap-select.min.js"></script>
+
+    <script type="text/javascript" src="scripts/admlogin.js"></script>
+
+  </body>
+</html> 
